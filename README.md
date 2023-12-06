@@ -1,9 +1,10 @@
-# Fluent
+# Fluent - Easy Telegram Bots with Spring!
 
-This Fluent library makes it very easy for you to write telegram bot with Spring framework. Creating a Telegram bot is 
-very easy and versatile.
+## Prerequisites
 
-## Download
+Make sure you are using Spring Boot version 3.0.0 or above.
+
+## Getting Started
 
 ### Maven
 
@@ -21,9 +22,9 @@ very easy and versatile.
 implementation group: 'io.github.nurislom373', name: 'spring-boot-starter-fluent', version: '1.0.0'
 ```
 
-## Example
+## How to Use
 
-The first thing you need to do after adding the dependency is to configure the bot token and username
+After adding the dependency, set up your bot by adding the bot token and username in your application.yaml file.
 
 ```yaml
 fluent:
@@ -32,7 +33,7 @@ fluent:
     username: <your bot username>
     process-type: update
 ```
-After adding the token and username, the only thing you need to do is create a bot controller
+Once you've added the token and username, create a bot controller.
 
 ```java
 @UpdateController
@@ -83,14 +84,14 @@ public class FluentController {
 }
 ```
 
-If exceptions occur after you run the bot, they are no problem to handle.
+Handling exceptions is easy too! Just create an exception controller.
 
 ```java
 @ExceptionController
-public class UpdateResourceImpl  {
+public class ExceptionHandler  {
 
     @HandleException({RuntimeException.class})
-    void test(Update update, Throwable throwable, AbsSender sender) throws TelegramApiException {
+    void handleRuntimeExceptions(Update update, AbsSender sender, Throwable throwable) throws TelegramApiException {
         String text = "I'm Handle Exception : " + throwable.getMessage();
         SendMessage message = new SendMessage(UpdateUtils.getUserId(update).toString(), text);
         sender.execute(message);
@@ -101,24 +102,8 @@ public class UpdateResourceImpl  {
 
 ## License
 
-MIT License
+[MIT License](https://github.com/Nurislom373/Fluent-Doc/blob/main/LICENSE)
 
-Copyright (c) 2023 Nurislom
+© 2023 Nurislom
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You have permission to use this software for free. For more details, check the [full license](https://github.com/Nurislom373/Fluent-Doc/blob/main/LICENSE).
